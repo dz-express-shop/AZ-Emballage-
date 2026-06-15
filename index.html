@@ -84,26 +84,27 @@
 </head>
 <body class="font-sans antialiased selection:bg-az-gold selection:text-black bg-pattern">
 
-    <header class="relative overflow-hidden border-b border-az-gray bg-az-dark">
+    <header class="relative overflow-hidden border-b border-az-gray bg-az-dark shadow-2xl">
         <!-- Abstract Gold Glow Background -->
         <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full opacity-30 pointer-events-none" 
              style="background: radial-gradient(circle at top, rgba(212, 175, 55, 0.4) 0%, transparent 70%);"></div>
              
         <div class="container mx-auto px-4 py-16 text-center relative z-10">
+            <!-- AZ Logo Style -->
             <div class="inline-block mb-4 p-3 rounded-2xl bg-black border border-az-gold shadow-gold">
                 <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-none" style="font-family: serif;">
                     A<span class="text-az-gold">Z</span>
                 </h1>
             </div>
-            <h2 class="text-2xl md:text-3xl font-bold text-az-gold mb-2 tracking-widest uppercase">
+            <h2 class="text-2xl md:text-3xl font-bold text-az-gold mb-2 tracking-widest uppercase" style="font-family: serif;">
                 EMBALLAGE
             </h2>
-            <p class="text-gray-400 tracking-widest text-sm md:text-base mb-10">فن التغليف الاحترافي لعرض متميز</p>
+            <p class="text-gray-400 tracking-widest text-sm md:text-base mb-10">فن التغليف الاحترافي | L'art de l'emballage</p>
             
             <h3 class="text-3xl md:text-4xl font-black text-white mb-4">الكتالوج الرقمي لطلبات الجملة</h3>
             <p class="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
                 تصفح تشكيلتنا الحصرية من حوامل الساعات والنظارات. 
-                حدد الكميات المطلوبة بكل سهولة وأرسل طلبيتك مباشرة عبر الواتساب.
+                حدد الكميات المطلوبة لكل منتج وأرسل طلبيتك مباشرة عبر الواتساب لمعالجتها فوراً.
             </p>
         </div>
     </header>
@@ -115,119 +116,111 @@
                 <i class="fas fa-gem text-az-gold ml-4"></i>
                 منتجاتنا (أسعار الجملة)
             </h3>
-            <div class="flex items-center gap-3">
+            <div class="flex flex-wrap items-center gap-3">
                 <span class="text-sm bg-az-lightGray border border-az-gray text-az-gold px-4 py-2 rounded-full font-bold">
                     <i class="fas fa-medal ml-2"></i>صنع في الجزائر
                 </span>
-                <span class="text-sm bg-az-lightGray border border-az-gray text-white px-4 py-2 rounded-full font-bold">
-                    <i class="fas fa-tags ml-2"></i>طلبيات الجملة فقط
+                <span class="text-sm bg-az-gold/10 border border-az-gold text-white px-4 py-2 rounded-full font-bold">
+                    <i class="fas fa-box-open ml-2"></i>طلبيات الجملة
                 </span>
             </div>
         </div>
 
-        <!-- Products Container (Injected via JS) -->
         <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            <!-- Loading skeleton placeholder -->
+            <!-- Products will be generated here by Javascript -->
             <div class="text-center text-az-gold py-10 col-span-full">
                 <i class="fas fa-circle-notch fa-spin text-4xl mb-4"></i>
-                <p>جاري تحميل المنتجات الفاخرة...</p>
+                <p>جاري تحميل المنتجات...</p>
             </div>
         </div>
 
     </main>
 
-    <!-- Floating Checkout Bar -->
     <div id="checkout-bar" class="fixed bottom-0 left-0 w-full glass-panel transform translate-y-full transition-transform duration-500 z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
         <div class="container mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between">
             
             <div class="flex items-center w-full md:w-auto mb-4 md:mb-0 justify-between md:justify-start">
                 <div class="flex items-center">
                     <div class="bg-az-gold/10 border border-az-gold/30 p-4 rounded-full mr-4 ml-4">
-                        <i class="fas fa-shopping-bag text-az-gold text-2xl"></i>
+                        <i class="fas fa-shopping-bag text-az-gold text-2xl animate-bounce"></i>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-400 mb-1">إجمالي الطلبية (<span id="total-items" class="font-bold text-white">0</span> عناصر)</p>
+                        <p class="text-sm text-gray-400 mb-1">إجمالي الطلبية (<span id="total-items" class="font-bold text-white">0</span> قطع)</p>
                         <p class="text-3xl font-black text-az-gold"><span id="total-price">0</span> <span class="text-lg font-normal">د.ج</span></p>
                     </div>
-                </div>
-                <!-- Mobile only total items badge -->
-                <div id="mobile-badge" class="md:hidden bg-az-gold text-black font-bold h-10 w-10 flex items-center justify-center rounded-full">
-                    0
                 </div>
             </div>
 
             <button onclick="sendToWhatsApp()" class="w-full md:w-auto bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-lg py-4 px-10 rounded-xl shadow-[0_4px_15px_rgba(37,211,102,0.4)] flex items-center justify-center transition-all transform hover:scale-105">
                 <i class="fab fa-whatsapp text-3xl ml-3"></i>
-                تأكيد وإرسال عبر الواتساب
+                تأكيد وإرسال الطلبية
             </button>
             
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
     <script>
-        // AZ Emballage WhatsApp Contact
+        // AZ Emballage WhatsApp Number
         const WHATSAPP_NUMBER = "213791059501"; 
 
-        // Product Database based on user's exact specifications
+        // Product Database exactly as you described
         const products = [
             {
                 id: 1,
                 name: "حامل ساعات وأساور - 3 مستويات",
                 category: "ساعات",
-                description: "ستاند عرض فاخر مغلف، تصميم 3 طوابق عملي جداً لعرض واجهة محلات الساعات. قابل للفك والتركيب لسهولة الشحن.",
-                price: 1500, 
-                image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "ستاند عرض مغلف بالمخمل الفاخر، تصميم 3 طوابق. قابل للفك والتركيب لسهولة التخزين والشحن.",
+                price: 1500, // Example price
+                image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=800&q=80",
                 badge: "الأكثر طلباً"
             },
             {
                 id: 2,
                 name: "حامل ساعات بريميوم - 4 مستويات",
                 category: "ساعات",
-                description: "النسخة الأكبر بـ 4 طوابق مع مساحة مخصصة أعلى الستاند لطباعة وإبراز العلامة التجارية. فخامة مضاعفة.",
+                description: "النسخة الأكبر بـ 4 طوابق مع مساحة مخصصة أعلى الستاند لطباعة العلامة التجارية (اللوغو). فخامة مضاعفة.",
                 price: 1800,
-                image: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=800&q=80",
                 badge: "مساحة للشعار"
             },
             {
                 id: 3,
                 name: "عرض نظارات مكتبي - 5 قطع",
                 category: "نظارات",
-                description: "ستاند مكتبي أنيق يحمل 5 نظارات. متوفر بتصاميم متعددة وعلامات تجارية مختلفة ليناسب جميع الأذواق.",
+                description: "ستاند مكتبي أنيق يحمل 5 نظارات. متوفر بتصاميم وألوان متعددة ليناسب جميع الديكورات.",
                 price: 800,
-                image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
                 badge: ""
             },
             {
                 id: 4,
                 name: "حامل عرض نظارات - 10 قطع",
                 category: "نظارات",
-                description: "تصميم عمودي يعرض 10 نظارات بوضوح تام. يأتي بألوان متنوعة وخيارات متعددة للعلامات التجارية.",
+                description: "تصميم عمودي يعرض 10 نظارات بوضوح. يأتي بألوان متنوعة وخيارات متعددة للعلامات التجارية.",
                 price: 1400,
-                image: "https://images.unsplash.com/photo-1577803645773-f96470509666?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=800&q=80",
                 badge: "ألوان متعددة"
             },
             {
                 id: 5,
                 name: "حامل نظارات دوار 360° - 40 قطعة",
                 category: "نظارات",
-                description: "الحل الاحترافي لعرض الكميات. ستاند عمودي دوار يوفر المساحة ويعرض 40 نظارة بشكل جذاب ومريح للزبون.",
+                description: "الحل الاحترافي. ستاند عمودي دوار يوفر المساحة ويعرض 40 نظارة بشكل جذاب ومريح.",
                 price: 5500,
-                image: "https://images.unsplash.com/photo-1572631382901-cece59b28299?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1572631382901-cece59b28299?auto=format&fit=crop&w=800&q=80",
                 badge: "دوار 360°"
             },
             {
                 id: 6,
                 name: "حامل نظارات 40 قطعة + مرآة",
                 category: "نظارات",
-                description: "ستاند العرض الشامل. يتسع لـ 40 نظارة ومزود بمرآة علوية مدمجة لتجربة قياس مثالية للزبائن داخل المعرض.",
+                description: "يتسع لـ 40 نظارة ومزود بمرآة علوية مدمجة لتجربة قياس مثالية للزبائن داخل المعرض.",
                 price: 6500,
-                image: "https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                image: "https://images.unsplash.com/photo-1509695507497-903c140c43b0?auto=format&fit=crop&w=800&q=80",
                 badge: "مميز بمرآة"
             }
         ];
 
-        // Shopping Cart Object
         let cart = {};
 
         const formatPrice = (price) => {
@@ -244,7 +237,6 @@
                 const hasBadge = product.badge !== "";
                 const badgeHTML = hasBadge ? `<span class="absolute top-4 right-4 bg-az-gold text-black text-sm font-bold px-4 py-1.5 rounded-full shadow-lg z-10 border border-yellow-200">${product.badge}</span>` : '';
                 
-                // Icon based on category
                 const catIcon = product.category === 'ساعات' ? 'fa-clock' : 'fa-glasses';
 
                 const cardHTML = `
@@ -252,9 +244,10 @@
                         ${badgeHTML}
                         <div class="h-64 overflow-hidden relative group border-b border-az-lightGray">
                             <div class="absolute inset-0 bg-gradient-to-t from-az-black to-transparent z-10 opacity-90"></div>
+                            <!-- Product Image -->
                             <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 opacity-60 grayscale-[30%] group-hover:grayscale-0">
                             
-                            <div class="absolute top-4 left-4 z-20 text-az-gold/70 bg-black/50 p-2 rounded-lg backdrop-blur-sm">
+                            <div class="absolute top-4 left-4 z-20 text-az-gold/70 bg-black/50 p-2 rounded-lg backdrop-blur-sm border border-az-gold/20">
                                 <i class="fas ${catIcon} text-xl"></i>
                             </div>
 
@@ -273,7 +266,7 @@
                             <div class="mt-auto pt-4 border-t border-az-lightGray">
                                 <div class="flex flex-col mb-2">
                                     <label class="text-sm text-az-gold mb-2 font-bold"><i class="fas fa-boxes ml-2"></i>حدد الكمية المطلوبة:</label>
-                                    <div class="flex items-center justify-between bg-black rounded-xl border border-az-gray overflow-hidden p-1">
+                                    <div class="flex items-center justify-between bg-black rounded-xl border border-az-gray overflow-hidden p-1 shadow-inner">
                                         <button onclick="updateQuantity(${product.id}, 1)" class="w-12 h-12 flex justify-center items-center rounded-lg bg-az-lightGray text-az-gold hover:bg-az-gold hover:text-black transition-colors focus:outline-none text-xl">
                                             <i class="fas fa-plus"></i>
                                         </button>
@@ -335,7 +328,6 @@
             });
 
             document.getElementById('total-items').innerText = totalItems;
-            document.getElementById('mobile-badge').innerText = totalItems;
             document.getElementById('total-price').innerText = formatPrice(totalPrice);
 
             const checkoutBar = document.getElementById('checkout-bar');
