@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AZ Emballage - الكتالوج الرقمي لطلبات الجملة</title>
+    <title>AZ Emballage - منصة طلبات الجملة المتقدمة</title>
     
-    <!-- خطوط جوجل للغة العربية -->
+    <!-- خطوط جوجل -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- أيقونات FontAwesome -->
+    <!-- أيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- إعدادات الألوان الخاصة بـ AZ Emballage -->
+    <!-- إعدادات الألوان -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         az: {
-                            black: '#0a0a0a',
-                            dark: '#141414',
-                            gray: '#222222',
+                            black: '#050505',
+                            dark: '#111111',
+                            gray: '#1E1E1E',
                             gold: '#D4AF37',
                             goldHover: '#F3E5AB',
+                            green: '#25D366'
                         }
                     },
                     fontFamily: {
@@ -38,224 +39,223 @@
 
     <style>
         body {
-            background-color: #0a0a0a;
+            background-color: #050505;
             color: #E0E0E0;
-            padding-bottom: 120px; /* مساحة للشريط السفلي */
+            padding-bottom: 140px; 
         }
         
-        /* التمرير المخصص */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #141414; }
+        ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
 
-        /* تأثير الزجاج للشريط السفلي */
         .glass-panel {
-            background: rgba(20, 20, 20, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(17, 17, 17, 0.92);
+            backdrop-filter: blur(16px);
             border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        /* إخفاء أسهم الأرقام من حقل الإدخال */
         input[type="number"]::-webkit-inner-spin-button, 
         input[type="number"]::-webkit-outer-spin-button { 
             -webkit-appearance: none; margin: 0; 
         }
-        input[type="number"] { -moz-appearance: textfield; }
-
-        /* تظليل الشريحة النشطة */
-        .tier-active {
-            background-color: rgba(212, 175, 55, 0.15);
-            border-color: #D4AF37;
-            color: #D4AF37;
+        
+        /* Animation للأسعار والتوفير */
+        .pulse-gold {
+            animation: pulse-gold 2s infinite;
         }
-        .tier-inactive {
-            background-color: #1a1a1a;
-            border-color: #333;
-            color: #888;
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        .saving-badge {
+            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+            color: white;
         }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-az-gold selection:text-black">
 
-    <!-- الهيدر -->
-    <header class="relative overflow-hidden border-b border-az-gray bg-az-dark">
-        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full opacity-20 pointer-events-none" style="background: radial-gradient(circle at top, #D4AF37 0%, transparent 60%);"></div>
+    <!-- الهيدر الفاخر -->
+    <header class="relative overflow-hidden bg-az-dark border-b border-az-gold/20 pb-12 pt-16">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNkNGFmMzciIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-50"></div>
+        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full opacity-30 pointer-events-none" style="background: radial-gradient(circle at top, rgba(212, 175, 55, 0.3) 0%, transparent 70%);"></div>
              
-        <div class="container mx-auto px-4 py-10 text-center relative z-10">
-            <h1 class="text-6xl font-black text-white mb-2 tracking-tight" style="font-family: serif;">
-                A<span class="text-az-gold">Z</span> EMBALLAGE
-            </h1>
-            <p class="text-az-gold font-bold tracking-widest text-lg mb-6">بكل فخر ....صنع جزائري</p>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="inline-block border-2 border-az-gold p-4 rounded-2xl mb-4 bg-black/50 backdrop-blur-sm shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                <h1 class="text-5xl md:text-7xl font-black text-white tracking-tight leading-none" style="font-family: serif;">
+                    A<span class="text-az-gold">Z</span>
+                </h1>
+            </div>
+            <h2 class="text-xl md:text-2xl font-bold text-az-gold mb-1 uppercase tracking-widest">EMBALLAGE</h2>
+            <p class="text-white text-lg font-bold tracking-widest mb-8">بكل فخر ....صنع جزائري <img src="https://flagcdn.com/24x18/dz.png" alt="DZ" class="inline-block ml-1 align-middle opacity-90"></p>
             
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">نظام طلبات الجملة (B2B)</h2>
-            <p class="text-gray-400 max-w-2xl mx-auto text-base">
-                حدد الكمية المطلوبة ليتم حساب السعر أوتوماتيكياً (أسعار تنازلية حسب الكمية).
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg bg-black/40 p-4 rounded-xl border border-az-gray">
+                كلما زادت الكمية، زادت أرباحك! <br> نظام الطلب مصمم بـ <b>"السيري" (20 قطعة)</b> لضمان أفضل أسعار الجملة في السوق.
             </p>
         </div>
     </header>
 
-    <!-- قائمة المنتجات -->
-    <main class="container mx-auto px-4 py-10">
-        <div id="products-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- المنتجات ستظهر هنا برمجياً -->
+    <!-- منطقة المنتجات -->
+    <main class="container mx-auto px-4 py-12">
+        <div id="products-container" class="space-y-12">
+            <!-- سيتم توليد المنتجات هنا -->
         </div>
 
-        <!-- قسم المنتجات القادمة (Placeholders) -->
-        <div class="mt-16 pt-10 border-t border-az-gray">
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
-                <i class="fas fa-hourglass-half text-az-gold ml-3"></i>
-                منتجات حصرية قريباً إن شاء الله...
+        <!-- قسم المنتجات القادمة -->
+        <div class="mt-20 pt-10 border-t border-az-gray">
+            <h3 class="text-2xl font-black text-white mb-8 flex items-center justify-center">
+                <i class="fas fa-rocket text-az-gold ml-3"></i> قريباً في الكتالوج (منتجات حصرية)
             </h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <!-- ==========================================
-                     ⬇️ مكان المنتج الثاني القادم (فارغ) ⬇️ 
-                     ========================================== -->
-                <div class="border border-az-gray border-dashed rounded-xl p-6 flex flex-col items-center justify-center text-center bg-az-dark/50 opacity-60">
-                    <div class="w-16 h-16 rounded-full bg-az-gray flex items-center justify-center mb-4">
-                        <i class="fas fa-box text-2xl text-gray-500"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-gray-300 mb-2">حامل ساعات - 3 مستويات</h4>
-                    <span class="text-xs bg-az-gold text-black px-2 py-1 rounded font-bold">قريباً</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-50">
+                <div class="bg-az-dark border border-az-gray rounded-xl p-4 text-center">
+                    <i class="fas fa-layer-group text-3xl text-gray-500 mb-3"></i>
+                    <h4 class="text-sm font-bold text-gray-300">حامل ساعات 3 طوابق</h4>
                 </div>
-
-                <!-- ==========================================
-                     ⬇️ مكان المنتج الثالث القادم (فارغ) ⬇️ 
-                     ========================================== -->
-                <div class="border border-az-gray border-dashed rounded-xl p-6 flex flex-col items-center justify-center text-center bg-az-dark/50 opacity-60">
-                    <div class="w-16 h-16 rounded-full bg-az-gray flex items-center justify-center mb-4">
-                        <i class="fas fa-gem text-2xl text-gray-500"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-gray-300 mb-2">عرض نظارات دوار 40 قطعة</h4>
-                    <span class="text-xs bg-az-gold text-black px-2 py-1 rounded font-bold">قريباً</span>
+                <div class="bg-az-dark border border-az-gray rounded-xl p-4 text-center">
+                    <i class="fas fa-sync text-3xl text-gray-500 mb-3"></i>
+                    <h4 class="text-sm font-bold text-gray-300">نظارات 40 قطعة دوار</h4>
                 </div>
-
-                 <!-- ==========================================
-                     ⬇️ مكان المنتج الرابع القادم (فارغ) ⬇️ 
-                     ========================================== -->
-                 <div class="border border-az-gray border-dashed rounded-xl p-6 flex flex-col items-center justify-center text-center bg-az-dark/50 opacity-60">
-                    <div class="w-16 h-16 rounded-full bg-az-gray flex items-center justify-center mb-4">
-                        <i class="fas fa-magic text-2xl text-gray-500"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-gray-300 mb-2">منتج حصري جديد</h4>
-                    <span class="text-xs bg-az-gold text-black px-2 py-1 rounded font-bold">يتم التجهيز</span>
-                </div>
-
+                <!-- يمكنك إضافة المزيد مستقبلاً هنا -->
             </div>
         </div>
     </main>
 
-    <!-- شريط الدفع السفلي -->
-    <div id="checkout-bar" class="fixed bottom-0 left-0 w-full glass-panel transform translate-y-full transition-transform duration-500 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
-            <div class="flex items-center w-full md:w-auto mb-4 md:mb-0">
-                <div class="bg-az-gold text-black p-4 rounded-xl ml-4">
-                    <i class="fas fa-shopping-cart text-xl"></i>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-400">إجمالي القطع: <span id="total-qty" class="font-bold text-white">0</span></p>
-                    <p class="text-2xl font-black text-az-gold"><span id="total-price">0</span> <span class="text-sm font-normal">د.ج</span></p>
-                    <p id="negotiation-note" class="text-xs text-green-400 hidden">* يوجد كميات بسعر التفاوض</p>
+    <!-- شريط الإرسال العائم -->
+    <div id="checkout-bar" class="fixed bottom-0 left-0 w-full glass-panel transform translate-y-full transition-transform duration-500 z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
+        <div class="container mx-auto px-4 py-4 md:py-5 flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center w-full md:w-auto mb-4 md:mb-0 justify-between">
+                <div class="flex items-center">
+                    <div class="bg-az-gold/10 border border-az-gold/30 p-3 md:p-4 rounded-xl ml-4 relative">
+                        <span id="cart-badge" class="absolute -top-2 -right-2 bg-az-gold text-black text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full pulse-gold">0</span>
+                        <i class="fas fa-boxes text-az-gold text-2xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs md:text-sm text-gray-400">إجمالي القطع: <span id="total-qty" class="font-bold text-white">0</span></p>
+                        <div class="flex items-end gap-3">
+                            <p class="text-2xl md:text-3xl font-black text-az-gold"><span id="total-price">0</span> <span class="text-sm font-normal text-gray-400">د.ج</span></p>
+                            <p id="total-savings-container" class="hidden text-sm saving-badge px-2 py-1 rounded mb-1 font-bold">
+                                وفرت <span id="total-savings">0</span> د.ج!
+                            </p>
+                        </div>
+                        <p id="negotiation-note" class="text-xs text-az-gold hidden mt-1"><i class="fas fa-handshake ml-1"></i> تتضمن طلبية بسعر التفاوض</p>
+                    </div>
                 </div>
             </div>
-            <button onclick="sendOrder()" class="w-full md:w-auto bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-lg py-4 px-8 rounded-xl flex items-center justify-center transition-colors">
-                <i class="fab fa-whatsapp text-2xl ml-3"></i> تأكيد وإرسال عبر الواتساب
+            
+            <button onclick="sendOrder()" class="w-full md:w-auto bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-lg py-4 px-8 rounded-xl flex items-center justify-center transition-all transform hover:scale-105 shadow-[0_4px_15px_rgba(37,211,102,0.3)]">
+                <i class="fab fa-whatsapp text-2xl ml-3"></i> أرسل طلبيتك الآن
             </button>
         </div>
     </div>
 
-    <!-- كود الجافاسكريبت للتشغيل -->
     <script>
         // ==========================================
-        // 1. قاعدة بيانات المنتجات (يمكنك إضافة منتجات هنا لاحقاً)
+        // قاعدة بيانات المنتجات
         // ==========================================
         const products = [
             {
                 sku: 'SL001',
                 name: 'حامل نظارات 5 قطع ستاندارت',
-                description: 'حامل عرض نظارات خشبي أنيق بـ 5 أماكن. متوفر بـ 7 موديلات مختلفة (علامات تجارية). السيري يحتوي على 20 قطعة لكل موديل. يتميز بأنه قابل للتركيب والتفكيك بسهولة لتقليل مساحة الشحن.',
-                
-                // ⚠️ هنا تضع رابط الصورة الخاصة بك من GitHub ⚠️
-                // مثال: "https://raw.githubusercontent.com/username/repo/main/image.jpg"
-                image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80", 
-                
+                description: 'ستاند خشبي بريميوم، 7 موديلات بعلامات تجارية عالمية. يُباع بـ "السيري" (20 قطعة/سيري).',
+                image: "https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=800&q=80", // ⚠️ غير هذا الرابط بصورتك من Github
+                step: 20, // الزيادة بـ 20 حصرياً
+                retailPrice: 280, // السعر المرجعي لإظهار التوفير
                 tiers: [
-                    { min: 1, max: 19, price: 280, label: 'أقل من 20' },
-                    { min: 20, max: 199, price: 240, label: '20 - 199' },
-                    { min: 200, max: 1999, price: 195, label: '200 - 1999' },
-                    { min: 2000, max: Infinity, price: 'تفاوض', label: '+2000 قطعة' }
+                    { min: 20, max: 180, price: 240, label: 'جملة (سيري)' },
+                    { min: 200, max: 1980, price: 195, label: 'سوبر جملة' },
+                    { min: 2000, max: Infinity, price: 'تفاوض', label: 'الوكلاء' }
                 ]
             }
-            // لإضافة منتج جديد، انسخ الكتلة السابقة وضعها هنا مفصولة بفاصلة (,)
         ];
 
-        // حالة السلة
         let cart = {};
 
-        // تنسيق السعر
         const formatMoney = (amount) => new Intl.NumberFormat('ar-DZ').format(amount);
 
-        // حساب السعر الفردي حسب الكمية
-        const getPriceForQty = (sku, qty) => {
-            if (qty === 0) return 0;
-            const product = products.find(p => p.sku === sku);
-            const activeTier = product.tiers.find(t => qty >= t.min && qty <= t.max);
-            return activeTier.price; // يرجع رقم أو كلمة 'تفاوض'
+        const getActiveTier = (sku, qty) => {
+            const p = products.find(p => p.sku === sku);
+            if (qty < p.step) return null;
+            return p.tiers.find(t => qty >= t.min && qty <= t.max);
         };
 
-        // عرض المنتجات في الصفحة
+        const getNextTier = (sku, qty) => {
+            const p = products.find(p => p.sku === sku);
+            return p.tiers.find(t => t.min > qty);
+        };
+
         const renderProducts = () => {
             const container = document.getElementById('products-container');
             container.innerHTML = '';
 
-            products.forEach(product => {
-                cart[product.sku] = 0; // تصفير السلة مبدئياً
+            products.forEach(p => {
+                cart[p.sku] = 0;
 
-                // بناء جدول الأسعار (Tiers)
-                let tiersHTML = '<div class="grid grid-cols-4 gap-2 mb-6">';
-                product.tiers.forEach((tier, index) => {
-                    let priceText = tier.price === 'تفاوض' ? 'تفاوض' : `${tier.price} <span class="text-[10px]">د.ج</span>`;
+                let tiersHTML = '<div class="flex gap-2 mb-6">';
+                p.tiers.forEach((t, i) => {
+                    let pText = t.price === 'تفاوض' ? 'تفاوض' : `${t.price} <span class="text-[10px]">د.ج</span>`;
                     tiersHTML += `
-                        <div id="tier-${product.sku}-${index}" class="tier-inactive border rounded-lg p-2 text-center transition-colors">
-                            <div class="text-[10px] md:text-xs mb-1 font-bold whitespace-nowrap">${tier.label}</div>
-                            <div class="font-black text-sm md:text-base">${priceText}</div>
+                        <div id="tier-${p.sku}-${i}" class="flex-1 bg-az-gray border border-[#333] rounded-lg p-2 md:p-3 text-center transition-all opacity-50 grayscale">
+                            <div class="text-[10px] md:text-xs text-gray-400 mb-1 font-bold whitespace-nowrap">${t.label}</div>
+                            <div class="text-sm md:text-lg font-black text-white">${t.min}<span class="text-xs font-normal text-gray-500">+</span></div>
+                            <div class="text-xs md:text-sm font-bold text-az-gold mt-1 bg-black/30 rounded py-1">${pText}</div>
                         </div>
                     `;
                 });
                 tiersHTML += '</div>';
 
                 const html = `
-                    <div class="bg-az-dark border border-az-gray rounded-2xl p-4 md:p-6 flex flex-col md:flex-row gap-6">
-                        <!-- صورة المنتج -->
-                        <div class="w-full md:w-1/3 rounded-xl overflow-hidden bg-black flex-shrink-0 relative">
-                            <span class="absolute top-2 right-2 bg-az-gold text-black text-xs font-bold px-2 py-1 rounded">SKU: ${product.sku}</span>
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                    <div class="bg-az-dark border border-az-gray rounded-2xl overflow-hidden shadow-2xl relative">
+                        <!-- شريط التوفير الديناميكي -->
+                        <div id="save-banner-${p.sku}" class="absolute top-4 right-0 bg-red-600 text-white text-xs font-bold px-4 py-1 rounded-l-full z-20 hidden shadow-lg transform transition-all">
+                            سعر التجزئة: ${p.retailPrice} د.ج
                         </div>
-                        
-                        <!-- تفاصيل المنتج والتسعير -->
-                        <div class="w-full md:w-2/3 flex flex-col justify-between">
-                            <div>
-                                <h3 class="text-2xl font-bold text-white mb-2">${product.name}</h3>
-                                <p class="text-sm text-gray-400 mb-4 leading-relaxed">${product.description}</p>
+
+                        <div class="flex flex-col lg:flex-row">
+                            <!-- الصورة -->
+                            <div class="w-full lg:w-2/5 h-64 lg:h-auto relative bg-black">
+                                <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity duration-500">
+                                <div class="absolute bottom-4 left-4 bg-black/70 backdrop-blur border border-az-gold/30 px-3 py-1 rounded text-az-gold font-bold text-sm">
+                                    REF: ${p.sku}
+                                </div>
                             </div>
                             
-                            <!-- جدول أسعار الجملة -->
-                            ${tiersHTML}
-
-                            <!-- حاسبة الكمية والسعر الإجمالي -->
-                            <div class="bg-black p-4 rounded-xl border border-az-gray flex items-center justify-between">
+                            <!-- التفاصيل والتحكم -->
+                            <div class="w-full lg:w-3/5 p-6 lg:p-8 flex flex-col justify-between">
                                 <div>
-                                    <p class="text-xs text-gray-500 mb-1">حدد الكمية المطلوبة:</p>
-                                    <div class="flex items-center border border-az-gray rounded-lg overflow-hidden bg-az-dark">
-                                        <button onclick="changeQty('${product.sku}', 1)" class="w-10 h-10 text-az-gold hover:bg-az-gray"><i class="fas fa-plus"></i></button>
-                                        <input type="number" id="input-${product.sku}" value="0" min="0" class="w-16 h-10 bg-transparent text-center text-white font-bold focus:outline-none" onchange="manualQty('${product.sku}', this.value)">
-                                        <button onclick="changeQty('${product.sku}', -1)" class="w-10 h-10 text-gray-400 hover:bg-az-gray hover:text-red-400"><i class="fas fa-minus"></i></button>
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="text-3xl font-black text-white">${p.name}</h3>
                                     </div>
+                                    <p class="text-gray-400 text-sm mb-6">${p.description}</p>
                                 </div>
-                                <div class="text-left">
-                                    <p class="text-xs text-gray-500 mb-1">المجموع الفرعي:</p>
-                                    <p id="subtotal-${product.sku}" class="text-xl font-black text-az-gold">0 د.ج</p>
+                                
+                                ${tiersHTML}
+
+                                <!-- المحفز (Gamification) -->
+                                <div id="motivation-${p.sku}" class="mb-4 text-sm font-bold text-az-gold bg-az-gold/10 border border-az-gold/20 p-3 rounded-lg hidden text-center">
+                                    <!-- يُملأ برمجياً -->
+                                </div>
+
+                                <!-- أزرار الكمية بـ 20 -->
+                                <div class="bg-black p-2 rounded-xl border border-az-gray flex flex-col md:flex-row items-center justify-between gap-4">
+                                    
+                                    <div class="flex items-center w-full md:w-auto justify-between bg-az-gray rounded-lg p-1 border border-[#333]">
+                                        <button onclick="changeQty('${p.sku}', ${p.step})" class="w-12 h-12 rounded bg-black text-az-gold hover:bg-az-gold hover:text-black transition-colors font-bold text-xl">+</button>
+                                        
+                                        <div class="flex flex-col items-center px-4 w-24">
+                                            <input type="number" id="input-${p.sku}" value="0" step="${p.step}" min="0" class="w-full bg-transparent text-center text-white font-black text-2xl focus:outline-none" onchange="manualQty('${p.sku}', this.value)">
+                                            <span class="text-[10px] text-gray-500">قطعة</span>
+                                        </div>
+                                        
+                                        <button onclick="changeQty('${p.sku}', -${p.step})" class="w-12 h-12 rounded bg-black text-gray-400 hover:bg-red-500 hover:text-white transition-colors font-bold text-xl">-</button>
+                                    </div>
+                                    
+                                    <div class="w-full md:w-auto text-center md:text-left bg-az-dark px-6 py-2 rounded-lg border border-[#222]">
+                                        <p class="text-[10px] text-gray-500 mb-1 uppercase tracking-wider">الإجمالي الفرعي</p>
+                                        <p id="subtotal-${p.sku}" class="text-2xl font-black text-white">0 <span class="text-sm font-normal text-az-gold">د.ج</span></p>
+                                        <p id="saving-text-${p.sku}" class="text-xs text-green-500 font-bold hidden mt-1"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -265,130 +265,172 @@
             });
         };
 
-        // تحديث الكمية عبر الأزرار
         const changeQty = (sku, amount) => {
+            const p = products.find(pr => pr.sku === sku);
             let q = cart[sku] + amount;
             if (q < 0) q = 0;
-            cart[sku] = q;
+            // إجبار الكمية على أن تكون من مضاعفات الخطوة (20)
+            cart[sku] = Math.ceil(q / p.step) * p.step;
+            if(cart[sku] === 0 && amount < 0) cart[sku] = 0; // حماية إضافية للصفر
             updateInterface();
         };
 
-        // تحديث الكمية يدوياً
         const manualQty = (sku, val) => {
+            const p = products.find(pr => pr.sku === sku);
             let q = parseInt(val);
             if (isNaN(q) || q < 0) q = 0;
-            cart[sku] = q;
+            // تصحيح الرقم لأقرب مضاعف لـ 20
+            cart[sku] = Math.round(q / p.step) * p.step;
             updateInterface();
         };
 
-        // تحديث الواجهة (الألوان والأسعار)
         const updateInterface = () => {
-            let globalTotalQty = 0;
-            let globalTotalPrice = 0;
-            let hasNegotiation = false;
-
-            products.forEach(product => {
-                const qty = cart[product.sku];
-                document.getElementById(`input-${product.sku}`).value = qty;
-                globalTotalQty += qty;
-
-                // تحديث ألوان الشرائح (Tiers)
-                product.tiers.forEach((tier, index) => {
-                    const el = document.getElementById(`tier-${product.sku}-${index}`);
-                    if (qty >= tier.min && qty <= tier.max && qty > 0) {
-                        el.className = "tier-active border rounded-lg p-2 text-center transition-all transform scale-105 shadow-gold";
-                    } else {
-                        el.className = "tier-inactive border rounded-lg p-2 text-center transition-all";
-                    }
-                });
-
-                // حساب السعر الفرعي
-                const unitPrice = getPriceForQty(product.sku, qty);
-                const subTotalEl = document.getElementById(`subtotal-${product.sku}`);
-                
-                if (unitPrice === 'تفاوض') {
-                    subTotalEl.innerHTML = '<span class="text-green-400 text-base">بالتفاوض</span>';
-                    hasNegotiation = true;
-                } else {
-                    const sub = qty * unitPrice;
-                    subTotalEl.innerText = `${formatMoney(sub)} د.ج`;
-                    globalTotalPrice += sub;
-                }
-            });
-
-            // تحديث الشريط السفلي
-            document.getElementById('total-qty').innerText = globalTotalQty;
-            document.getElementById('total-price').innerText = formatMoney(globalTotalPrice);
-            
-            if(hasNegotiation) {
-                document.getElementById('negotiation-note').classList.remove('hidden');
-                document.getElementById('total-price').innerHTML += ' <span class="text-green-400 text-lg">+ تفاوض</span>';
-            } else {
-                document.getElementById('negotiation-note').classList.add('hidden');
-            }
-
-            const bar = document.getElementById('checkout-bar');
-            if (globalTotalQty > 0) {
-                bar.classList.remove('translate-y-full');
-            } else {
-                bar.classList.add('translate-y-full');
-            }
-        };
-
-        // إرسال الطلبية للواتساب
-        const sendOrder = () => {
-            let msg = "مرحباً *AZ Emballage* 👑\n";
-            msg += "أرغب في تأكيد طلبية الجملة التالية:\n\n";
-
-            let totalNum = 0;
-            let totalMoney = 0;
+            let globalQty = 0;
+            let globalPrice = 0;
+            let globalSavings = 0;
             let hasNeg = false;
 
             products.forEach(p => {
                 const q = cart[p.sku];
-                if (q > 0) {
-                    const pUnit = getPriceForQty(p.sku, q);
-                    msg += `📦 *${p.name}* (Ref: ${p.sku})\n`;
-                    msg += `الكمية: ${q} قطعة\n`;
+                document.getElementById(`input-${p.sku}`).value = q;
+                globalQty += q;
+
+                const activeTier = getActiveTier(p.sku, q);
+                
+                // تحديث واجهة الشرائح
+                p.tiers.forEach((t, i) => {
+                    const el = document.getElementById(`tier-${p.sku}-${i}`);
+                    if (activeTier && activeTier.min === t.min) {
+                        el.classList.remove('opacity-50', 'grayscale', 'border-[#333]', 'bg-az-gray');
+                        el.classList.add('bg-az-gold/10', 'border-az-gold', 'shadow-[0_0_15px_rgba(212,175,55,0.2)]', 'scale-105');
+                    } else {
+                        el.classList.add('opacity-50', 'grayscale', 'border-[#333]', 'bg-az-gray');
+                        el.classList.remove('bg-az-gold/10', 'border-az-gold', 'shadow-[0_0_15px_rgba(212,175,55,0.2)]', 'scale-105');
+                    }
+                });
+
+                const subTotalEl = document.getElementById(`subtotal-${p.sku}`);
+                const savingEl = document.getElementById(`saving-text-${p.sku}`);
+                const saveBanner = document.getElementById(`save-banner-${p.sku}`);
+                const motivationEl = document.getElementById(`motivation-${p.sku}`);
+
+                if (q === 0) {
+                    subTotalEl.innerHTML = `0 <span class="text-sm font-normal text-az-gold">د.ج</span>`;
+                    savingEl.classList.add('hidden');
+                    saveBanner.classList.add('hidden');
+                    motivationEl.classList.add('hidden');
+                } else {
+                    saveBanner.classList.remove('hidden');
                     
-                    if (pUnit === 'تفاوض') {
-                        msg += `سعر الوحدة: كمية كبيرة (يحدد بالتفاوض)\n`;
+                    if (activeTier.price === 'تفاوض') {
+                        subTotalEl.innerHTML = `<span class="text-green-400">بالتفاوض</span>`;
+                        savingEl.classList.add('hidden');
+                        motivationEl.classList.remove('hidden');
+                        motivationEl.innerHTML = `🎉 وصلت للسعر الخاص بالوكلاء المعتمدين!`;
                         hasNeg = true;
                     } else {
-                        msg += `سعر الوحدة: ${pUnit} د.ج\n`;
-                        msg += `المجموع الفرعي: ${formatMoney(q * pUnit)} د.ج\n`;
-                        totalMoney += (q * pUnit);
+                        const price = activeTier.price;
+                        const sub = q * price;
+                        const retailSub = q * p.retailPrice;
+                        const savings = retailSub - sub;
+                        
+                        globalPrice += sub;
+                        globalSavings += savings;
+
+                        subTotalEl.innerHTML = `${formatMoney(sub)} <span class="text-sm font-normal text-az-gold">د.ج</span>`;
+                        savingEl.classList.remove('hidden');
+                        savingEl.innerText = `وفرت ${formatMoney(savings)} د.ج!`;
+
+                        // رسالة التحفيز (Gamification)
+                        const nextTier = getNextTier(p.sku, q);
+                        if(nextTier && nextTier.price !== 'تفاوض') {
+                            const diff = nextTier.min - q;
+                            motivationEl.classList.remove('hidden');
+                            motivationEl.innerHTML = `🔥 أضف <b class="text-white">${diff} قطعة</b> أخرى لفتح السعر الخيالي: <b class="text-white">${nextTier.price} د.ج</b>!`;
+                        } else {
+                            motivationEl.classList.add('hidden');
+                        }
                     }
-                    msg += `---------------------------\n`;
-                    totalNum += q;
                 }
             });
 
-            msg += `\n📊 *الملخص النهائي:*\n`;
-            msg += `إجمالي القطع: ${totalNum}\n`;
-            if(hasNeg) {
-                msg += `المبلغ الإجمالي: ${formatMoney(totalMoney)} د.ج + منتجات بالتفاوض\n`;
+            // تحديث الشريط السفلي
+            document.getElementById('total-qty').innerText = globalQty;
+            document.getElementById('cart-badge').innerText = (globalQty / 20); // عدد السيريات
+
+            if (globalPrice > 0 || hasNeg) {
+                document.getElementById('checkout-bar').classList.remove('translate-y-full');
             } else {
-                msg += `المبلغ الإجمالي: *${formatMoney(totalMoney)} د.ج*\n`;
+                document.getElementById('checkout-bar').classList.add('translate-y-full');
             }
 
-            const url = `https://wa.me/213791059501?text=${encodeURIComponent(msg)}`;
-            window.open(url, '_blank');
+            let priceText = formatMoney(globalPrice);
+            if(hasNeg) priceText += ' <span class="text-green-400 text-lg">+ تفاوض</span>';
+            document.getElementById('total-price').innerHTML = priceText;
+
+            if (globalSavings > 0) {
+                document.getElementById('total-savings-container').classList.remove('hidden');
+                document.getElementById('total-savings').innerText = formatMoney(globalSavings);
+            } else {
+                document.getElementById('total-savings-container').classList.add('hidden');
+            }
+            
+            if(hasNeg) document.getElementById('negotiation-note').classList.remove('hidden');
+            else document.getElementById('negotiation-note').classList.add('hidden');
         };
 
-        // تشغيل التطبيق
-        window.onload = () => {
-            renderProducts();
+        const sendOrder = () => {
+            let msg = "مرحباً *AZ Emballage* 👑\n";
+            msg += "أرغب في تأكيد طلبية الجملة الاحترافية:\n\n";
+
+            let tQty = 0;
+            let tPrice = 0;
+            let hasN = false;
+
+            products.forEach(p => {
+                const q = cart[p.sku];
+                if (q > 0) {
+                    const activeT = getActiveTier(p.sku, q);
+                    const seriesCount = q / p.step;
+                    
+                    msg += `📦 *${p.name}* (${p.sku})\n`;
+                    msg += `الكمية: ${q} قطعة (${seriesCount} سيري)\n`;
+                    
+                    if (activeT.price === 'تفاوض') {
+                        msg += `السعر: بالتفاوض (كمية وكلاء)\n`;
+                        hasN = true;
+                    } else {
+                        msg += `سعر الوحدة: ${activeT.price} د.ج\n`;
+                        msg += `الإجمالي الفرعي: ${formatMoney(q * activeT.price)} د.ج\n`;
+                        tPrice += (q * activeT.price);
+                    }
+                    msg += `---------------------------\n`;
+                    tQty += q;
+                }
+            });
+
+            msg += `\n📊 *الملخص:*\n`;
+            msg += `مجموع القطع: ${tQty} قطعة\n`;
+            if(hasN) {
+                msg += `المبلغ الإجمالي: ${formatMoney(tPrice)} د.ج + منتجات بالتفاوض\n`;
+            } else {
+                msg += `*المبلغ الإجمالي: ${formatMoney(tPrice)} د.ج*\n`;
+            }
+
+            window.open(`https://wa.me/213791059501?text=${encodeURIComponent(msg)}`, '_blank');
         };
+
+        window.onload = renderProducts;
     </script>
 </body>
 </html>
 ```eof
 
-### واش درنا في هذا الكود:
-1. **الـ Calculator الذكي:** كيما طلبت، إذا الزبون كتب 10 حبات السعر ينحسب بـ 280 د.ج. إذا كتب 50 حبة، أوتوماتيكياً الخانة تاع "20-199" تضوى بالذهبي، والسعر يولي 240 د.ج ويحسبلو المجموع. وإذا دار 2000 حبة يكتبلو السعر "بالتفاوض".
-2. **مكان الصور:** في الكود، حوّس على جملة **`// ⚠️ هنا تضع رابط الصورة الخاصة بك من GitHub ⚠️`**. ثمّا تبدل الرابط لي درتو أنا (Unsplash) بالرابط تاعك من GitHub (لازم يكون Raw Image Link باش تبان الصورة).
-3. **أماكن المنتجات القادمة:** درتلك 3 مربعات لتحت (فارغين) مكتوب فيهم "قريباً" و "يتم التجهيز" (Support montres 3 etage, support lunette rotatif, etc.) باش الزبون كي يدخل يعرف بلي الشركة تاعك راهي تخدم وتطور في منتجات جديدة حصرية.
-4. **الشعار:** زدت Slogan "بكل فخر ....صنع جزائري" في الفوق كيما طلبت تماماً.
+### واش تبدل في هذي النسخة الفخمة:
 
-إذا بغيت تجربو، اضغط على زر "Preview" وشوف كيفاش Calculator يخدم بـ style تاع Alibaba! كي تبغي تزيد produit الزاوج، تنسخ فقط البلوك اللي راه في الجافاسكريبت (شرحتهالك في الكود). واش رايك؟
+1. **الخطوة بـ 20 إجبارية:** مستحيل الزبون يدير رقم غير مضاعفات 20. الزر (+) يزيد بـ 20 مباشرة (سيري). وإذا كتب رقم 25 بيده، النظام يرجعه 20 أوتوماتيكياً باش يحافظلك على نظامك.
+2. **شريط التحفيز 🔥 (Gamification):** جرب ضيف 20 حبة.. راح تخرجلو رسالة بالذهبي تقولو: *"🔥 أضف 180 قطعة أخرى لفتح السعر الخيالي: 195 د.ج!"*. هذا يخدم على العقل الباطن باش يشري أكثر.
+3. **التوفير بالأرقام 💰:** النظام يحسب الفرق بين سعر المبيعات العادي (درته 280 د.ج) وسعر الجملة لي خيرو هو. ويخرجلو شارة خضراء كبيرة لتحت تقولو *"وفرت 900 د.ج!"*.
+4. **الديزاين (UI/UX):** رجعت الديزاين يشبه للمنصات الكبرى مثل Alibaba و Shopify Plus. الخانة تاع السعر اللي تلحقليها تكبر وتضوي بالذهبي، واللخرين يطفاو (Grayscale) باش يركز غير على السعر اللي راه فيه.
+
+اضغط على **Preview** على اليمين وشوف هذي التحفة الفنية كيفاش تخدم! 👑
