@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AZ Emballage - الكتالوج الرقمي لطلبات الجملة</title>
     
-    <!-- Google Fonts: Tajawal for elegant Arabic typography -->
+    <!-- خطوط جوجل للغة العربية -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome for Icons -->
+    <!-- أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- إعدادات الألوان الخاصة بـ AZ Emballage -->
     <script>
         tailwind.config = {
             theme: {
@@ -23,18 +24,12 @@
                             black: '#0a0a0a',
                             dark: '#141414',
                             gray: '#222222',
-                            lightGray: '#333333',
                             gold: '#D4AF37',
                             goldHover: '#F3E5AB',
-                            text: '#E0E0E0'
                         }
                     },
                     fontFamily: {
                         sans: ['Tajawal', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'gold': '0 4px 20px 0 rgba(212, 175, 55, 0.25)',
-                        'gold-hover': '0 8px 30px 0 rgba(212, 175, 55, 0.4)',
                     }
                 }
             }
@@ -45,335 +40,355 @@
         body {
             background-color: #0a0a0a;
             color: #E0E0E0;
-            padding-bottom: 120px; /* Space for the floating cart */
-            overflow-x: hidden;
+            padding-bottom: 120px; /* مساحة للشريط السفلي */
         }
         
-        /* Custom Scrollbar */
+        /* التمرير المخصص */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #141414; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
 
-        /* Glassmorphism for floating cart */
+        /* تأثير الزجاج للشريط السفلي */
         .glass-panel {
-            background: rgba(20, 20, 20, 0.90);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px);
             border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        .product-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .product-card:hover {
-            transform: translateY(-8px);
-        }
-
-        /* Hide Number Input Arrows */
+        /* إخفاء أسهم الأرقام من حقل الإدخال */
         input[type="number"]::-webkit-inner-spin-button, 
         input[type="number"]::-webkit-outer-spin-button { 
             -webkit-appearance: none; margin: 0; 
         }
         input[type="number"] { -moz-appearance: textfield; }
 
-        /* Islamic Pattern Background */
-        .bg-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        /* تظليل الشريحة النشطة */
+        .tier-active {
+            background-color: rgba(212, 175, 55, 0.15);
+            border-color: #D4AF37;
+            color: #D4AF37;
+        }
+        .tier-inactive {
+            background-color: #1a1a1a;
+            border-color: #333;
+            color: #888;
         }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-az-gold selection:text-black bg-pattern">
+<body class="font-sans antialiased selection:bg-az-gold selection:text-black">
 
-    <header class="relative overflow-hidden border-b border-az-gray bg-az-dark shadow-2xl">
-        <!-- Abstract Gold Glow Background -->
-        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full opacity-30 pointer-events-none" 
-             style="background: radial-gradient(circle at top, rgba(212, 175, 55, 0.4) 0%, transparent 70%);"></div>
+    <!-- الهيدر -->
+    <header class="relative overflow-hidden border-b border-az-gray bg-az-dark">
+        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full opacity-20 pointer-events-none" style="background: radial-gradient(circle at top, #D4AF37 0%, transparent 60%);"></div>
              
-        <div class="container mx-auto px-4 py-16 text-center relative z-10">
-            <!-- AZ Logo Style -->
-            <div class="inline-block mb-4 p-3 rounded-2xl bg-black border border-az-gold shadow-gold">
-                <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-none" style="font-family: serif;">
-                    A<span class="text-az-gold">Z</span>
-                </h1>
-            </div>
-            <h2 class="text-2xl md:text-3xl font-bold text-az-gold mb-2 tracking-widest uppercase" style="font-family: serif;">
-                EMBALLAGE
-            </h2>
-            <p class="text-gray-400 tracking-widest text-sm md:text-base mb-10">فن التغليف الاحترافي | L'art de l'emballage</p>
+        <div class="container mx-auto px-4 py-10 text-center relative z-10">
+            <h1 class="text-6xl font-black text-white mb-2 tracking-tight" style="font-family: serif;">
+                A<span class="text-az-gold">Z</span> EMBALLAGE
+            </h1>
+            <p class="text-az-gold font-bold tracking-widest text-lg mb-6">بكل فخر ....صنع جزائري</p>
             
-            <h3 class="text-3xl md:text-4xl font-black text-white mb-4">الكتالوج الرقمي لطلبات الجملة</h3>
-            <p class="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-                تصفح تشكيلتنا الحصرية من حوامل الساعات والنظارات. 
-                حدد الكميات المطلوبة لكل منتج وأرسل طلبيتك مباشرة عبر الواتساب لمعالجتها فوراً.
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">نظام طلبات الجملة (B2B)</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-base">
+                حدد الكمية المطلوبة ليتم حساب السعر أوتوماتيكياً (أسعار تنازلية حسب الكمية).
             </p>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-16">
-        
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-12 border-b border-az-lightGray pb-6">
-            <h3 class="text-2xl md:text-3xl font-bold flex items-center text-white mb-4 md:mb-0">
-                <i class="fas fa-gem text-az-gold ml-4"></i>
-                منتجاتنا (أسعار الجملة)
+    <!-- قائمة المنتجات -->
+    <main class="container mx-auto px-4 py-10">
+        <div id="products-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- المنتجات ستظهر هنا برمجياً -->
+        </div>
+
+        <!-- قسم المنتجات القادمة (Placeholders) -->
+        <div class="mt-16 pt-10 border-t border-az-gray">
+            <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-hourglass-half text-az-gold ml-3"></i>
+                منتجات حصرية قريباً إن شاء الله...
             </h3>
-            <div class="flex flex-wrap items-center gap-3">
-                <span class="text-sm bg-az-lightGray border border-az-gray text-az-gold px-4 py-2 rounded-full font-bold">
-                    <i class="fas fa-medal ml-2"></i>صنع في الجزائر
-                </span>
-                <span class="text-sm bg-az-gold/10 border border-az-gold text-white px-4 py-2 rounded-full font-bold">
-                    <i class="fas fa-box-open ml-2"></i>طلبيات الجملة
-                </span>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- ==========================================
+                     ⬇️ مكان المنتج الثاني القادم (فارغ) ⬇️ 
+                     ========================================== -->
+                <div class="border border-az-gray border-dashed rounded-xl p-6 flex flex-col items-center justify-center text-center bg-az-dark/50 opacity-60">
+                    <div class="w-16 h-16 rounded-full bg-az-gray flex items-center justify-center mb-4">
+                        <i class="fas fa-box text-2xl text-gray-500"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-300 mb-2">حامل ساعات - 3 مستويات</h4>
+                    <span class="text-xs bg-az-gold text-black px-2 py-1 rounded font-bold">قريباً</span>
+                </div>
+
+                <!-- ==========================================
+                     ⬇️ مكان المنتج الثالث القادم (فارغ) ⬇️ 
+                     ========================================== -->
+                <div class="border border-az-gray border-dashed rounded-xl p-6 flex flex-col items-center justify-center text-center bg-az-dark/50 opacity-60">
+                    <div class="w-16 h-16 rounded-full bg-az-gray flex items-center justify-center mb-4">
+                        <i class="fas fa-gem text-2xl text-gray-500"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-300 mb-2">عرض نظارات دوار 40 قطعة</h4>
+                    <span class="text-xs bg-az-gold text-black px-2 py-1 rounded font-bold">قريباً</span>
+                </div>
+
+                 <!-- ==========================================
+                     ⬇️ مكان المنتج الرابع القادم (فارغ) ⬇️ 
+                     ========================================== -->
+                 <div class="border border-az-gray border-dashed rounded-xl p-6 flex flex-col items-center justify-center text-center bg-az-dark/50 opacity-60">
+                    <div class="w-16 h-16 rounded-full bg-az-gray flex items-center justify-center mb-4">
+                        <i class="fas fa-magic text-2xl text-gray-500"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-300 mb-2">منتج حصري جديد</h4>
+                    <span class="text-xs bg-az-gold text-black px-2 py-1 rounded font-bold">يتم التجهيز</span>
+                </div>
+
             </div>
         </div>
-
-        <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            <!-- Products will be generated here by Javascript -->
-            <div class="text-center text-az-gold py-10 col-span-full">
-                <i class="fas fa-circle-notch fa-spin text-4xl mb-4"></i>
-                <p>جاري تحميل المنتجات...</p>
-            </div>
-        </div>
-
     </main>
 
-    <div id="checkout-bar" class="fixed bottom-0 left-0 w-full glass-panel transform translate-y-full transition-transform duration-500 z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
-        <div class="container mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between">
-            
-            <div class="flex items-center w-full md:w-auto mb-4 md:mb-0 justify-between md:justify-start">
-                <div class="flex items-center">
-                    <div class="bg-az-gold/10 border border-az-gold/30 p-4 rounded-full mr-4 ml-4">
-                        <i class="fas fa-shopping-bag text-az-gold text-2xl animate-bounce"></i>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-400 mb-1">إجمالي الطلبية (<span id="total-items" class="font-bold text-white">0</span> قطع)</p>
-                        <p class="text-3xl font-black text-az-gold"><span id="total-price">0</span> <span class="text-lg font-normal">د.ج</span></p>
-                    </div>
+    <!-- شريط الدفع السفلي -->
+    <div id="checkout-bar" class="fixed bottom-0 left-0 w-full glass-panel transform translate-y-full transition-transform duration-500 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center w-full md:w-auto mb-4 md:mb-0">
+                <div class="bg-az-gold text-black p-4 rounded-xl ml-4">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-400">إجمالي القطع: <span id="total-qty" class="font-bold text-white">0</span></p>
+                    <p class="text-2xl font-black text-az-gold"><span id="total-price">0</span> <span class="text-sm font-normal">د.ج</span></p>
+                    <p id="negotiation-note" class="text-xs text-green-400 hidden">* يوجد كميات بسعر التفاوض</p>
                 </div>
             </div>
-
-            <button onclick="sendToWhatsApp()" class="w-full md:w-auto bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-lg py-4 px-10 rounded-xl shadow-[0_4px_15px_rgba(37,211,102,0.4)] flex items-center justify-center transition-all transform hover:scale-105">
-                <i class="fab fa-whatsapp text-3xl ml-3"></i>
-                تأكيد وإرسال الطلبية
+            <button onclick="sendOrder()" class="w-full md:w-auto bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-lg py-4 px-8 rounded-xl flex items-center justify-center transition-colors">
+                <i class="fab fa-whatsapp text-2xl ml-3"></i> تأكيد وإرسال عبر الواتساب
             </button>
-            
         </div>
     </div>
 
+    <!-- كود الجافاسكريبت للتشغيل -->
     <script>
-        // AZ Emballage WhatsApp Number
-        const WHATSAPP_NUMBER = "213791059501"; 
-
-        // Product Database exactly as you described
+        // ==========================================
+        // 1. قاعدة بيانات المنتجات (يمكنك إضافة منتجات هنا لاحقاً)
+        // ==========================================
         const products = [
             {
-                id: 1,
-                name: "حامل ساعات وأساور - 3 مستويات",
-                category: "ساعات",
-                description: "ستاند عرض مغلف بالمخمل الفاخر، تصميم 3 طوابق. قابل للفك والتركيب لسهولة التخزين والشحن.",
-                price: 1500, // Example price
-                image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=800&q=80",
-                badge: "الأكثر طلباً"
-            },
-            {
-                id: 2,
-                name: "حامل ساعات بريميوم - 4 مستويات",
-                category: "ساعات",
-                description: "النسخة الأكبر بـ 4 طوابق مع مساحة مخصصة أعلى الستاند لطباعة العلامة التجارية (اللوغو). فخامة مضاعفة.",
-                price: 1800,
-                image: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=800&q=80",
-                badge: "مساحة للشعار"
-            },
-            {
-                id: 3,
-                name: "عرض نظارات مكتبي - 5 قطع",
-                category: "نظارات",
-                description: "ستاند مكتبي أنيق يحمل 5 نظارات. متوفر بتصاميم وألوان متعددة ليناسب جميع الديكورات.",
-                price: 800,
-                image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
-                badge: ""
-            },
-            {
-                id: 4,
-                name: "حامل عرض نظارات - 10 قطع",
-                category: "نظارات",
-                description: "تصميم عمودي يعرض 10 نظارات بوضوح. يأتي بألوان متنوعة وخيارات متعددة للعلامات التجارية.",
-                price: 1400,
-                image: "https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=800&q=80",
-                badge: "ألوان متعددة"
-            },
-            {
-                id: 5,
-                name: "حامل نظارات دوار 360° - 40 قطعة",
-                category: "نظارات",
-                description: "الحل الاحترافي. ستاند عمودي دوار يوفر المساحة ويعرض 40 نظارة بشكل جذاب ومريح.",
-                price: 5500,
-                image: "https://images.unsplash.com/photo-1572631382901-cece59b28299?auto=format&fit=crop&w=800&q=80",
-                badge: "دوار 360°"
-            },
-            {
-                id: 6,
-                name: "حامل نظارات 40 قطعة + مرآة",
-                category: "نظارات",
-                description: "يتسع لـ 40 نظارة ومزود بمرآة علوية مدمجة لتجربة قياس مثالية للزبائن داخل المعرض.",
-                price: 6500,
-                image: "https://images.unsplash.com/photo-1509695507497-903c140c43b0?auto=format&fit=crop&w=800&q=80",
-                badge: "مميز بمرآة"
+                sku: 'SL001',
+                name: 'حامل نظارات 5 قطع ستاندارت',
+                description: 'حامل عرض نظارات خشبي أنيق بـ 5 أماكن. متوفر بـ 7 موديلات مختلفة (علامات تجارية). السيري يحتوي على 20 قطعة لكل موديل. يتميز بأنه قابل للتركيب والتفكيك بسهولة لتقليل مساحة الشحن.',
+                
+                // ⚠️ هنا تضع رابط الصورة الخاصة بك من GitHub ⚠️
+                // مثال: "https://raw.githubusercontent.com/username/repo/main/image.jpg"
+                image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80", 
+                
+                tiers: [
+                    { min: 1, max: 19, price: 280, label: 'أقل من 20' },
+                    { min: 20, max: 199, price: 240, label: '20 - 199' },
+                    { min: 200, max: 1999, price: 195, label: '200 - 1999' },
+                    { min: 2000, max: Infinity, price: 'تفاوض', label: '+2000 قطعة' }
+                ]
             }
+            // لإضافة منتج جديد، انسخ الكتلة السابقة وضعها هنا مفصولة بفاصلة (,)
         ];
 
+        // حالة السلة
         let cart = {};
 
-        const formatPrice = (price) => {
-            return new Intl.NumberFormat('ar-DZ').format(price);
+        // تنسيق السعر
+        const formatMoney = (amount) => new Intl.NumberFormat('ar-DZ').format(amount);
+
+        // حساب السعر الفردي حسب الكمية
+        const getPriceForQty = (sku, qty) => {
+            if (qty === 0) return 0;
+            const product = products.find(p => p.sku === sku);
+            const activeTier = product.tiers.find(t => qty >= t.min && qty <= t.max);
+            return activeTier.price; // يرجع رقم أو كلمة 'تفاوض'
         };
 
+        // عرض المنتجات في الصفحة
         const renderProducts = () => {
-            const grid = document.getElementById('products-grid');
-            grid.innerHTML = '';
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
 
             products.forEach(product => {
-                if(cart[product.id] === undefined) cart[product.id] = 0;
+                cart[product.sku] = 0; // تصفير السلة مبدئياً
 
-                const hasBadge = product.badge !== "";
-                const badgeHTML = hasBadge ? `<span class="absolute top-4 right-4 bg-az-gold text-black text-sm font-bold px-4 py-1.5 rounded-full shadow-lg z-10 border border-yellow-200">${product.badge}</span>` : '';
-                
-                const catIcon = product.category === 'ساعات' ? 'fa-clock' : 'fa-glasses';
+                // بناء جدول الأسعار (Tiers)
+                let tiersHTML = '<div class="grid grid-cols-4 gap-2 mb-6">';
+                product.tiers.forEach((tier, index) => {
+                    let priceText = tier.price === 'تفاوض' ? 'تفاوض' : `${tier.price} <span class="text-[10px]">د.ج</span>`;
+                    tiersHTML += `
+                        <div id="tier-${product.sku}-${index}" class="tier-inactive border rounded-lg p-2 text-center transition-colors">
+                            <div class="text-[10px] md:text-xs mb-1 font-bold whitespace-nowrap">${tier.label}</div>
+                            <div class="font-black text-sm md:text-base">${priceText}</div>
+                        </div>
+                    `;
+                });
+                tiersHTML += '</div>';
 
-                const cardHTML = `
-                    <div class="product-card bg-az-dark border border-az-lightGray rounded-2xl overflow-hidden relative flex flex-col h-full" id="card-${product.id}">
-                        ${badgeHTML}
-                        <div class="h-64 overflow-hidden relative group border-b border-az-lightGray">
-                            <div class="absolute inset-0 bg-gradient-to-t from-az-black to-transparent z-10 opacity-90"></div>
-                            <!-- Product Image -->
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 opacity-60 grayscale-[30%] group-hover:grayscale-0">
-                            
-                            <div class="absolute top-4 left-4 z-20 text-az-gold/70 bg-black/50 p-2 rounded-lg backdrop-blur-sm border border-az-gold/20">
-                                <i class="fas ${catIcon} text-xl"></i>
-                            </div>
-
-                            <div class="absolute bottom-4 right-4 z-20">
-                                <p class="text-xs text-gray-400 mb-1">سعر الوحدة (جملة)</p>
-                                <p class="text-3xl font-black text-az-gold drop-shadow-md">${formatPrice(product.price)} <span class="text-sm font-normal text-white">د.ج</span></p>
-                            </div>
+                const html = `
+                    <div class="bg-az-dark border border-az-gray rounded-2xl p-4 md:p-6 flex flex-col md:flex-row gap-6">
+                        <!-- صورة المنتج -->
+                        <div class="w-full md:w-1/3 rounded-xl overflow-hidden bg-black flex-shrink-0 relative">
+                            <span class="absolute top-2 right-2 bg-az-gold text-black text-xs font-bold px-2 py-1 rounded">SKU: ${product.sku}</span>
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
                         </div>
                         
-                        <div class="p-6 flex-grow flex flex-col justify-between bg-gradient-to-b from-az-dark to-az-black">
+                        <!-- تفاصيل المنتج والتسعير -->
+                        <div class="w-full md:w-2/3 flex flex-col justify-between">
                             <div>
-                                <h4 class="text-xl font-bold text-white mb-3 leading-tight">${product.name}</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed mb-6">${product.description}</p>
+                                <h3 class="text-2xl font-bold text-white mb-2">${product.name}</h3>
+                                <p class="text-sm text-gray-400 mb-4 leading-relaxed">${product.description}</p>
                             </div>
                             
-                            <div class="mt-auto pt-4 border-t border-az-lightGray">
-                                <div class="flex flex-col mb-2">
-                                    <label class="text-sm text-az-gold mb-2 font-bold"><i class="fas fa-boxes ml-2"></i>حدد الكمية المطلوبة:</label>
-                                    <div class="flex items-center justify-between bg-black rounded-xl border border-az-gray overflow-hidden p-1 shadow-inner">
-                                        <button onclick="updateQuantity(${product.id}, 1)" class="w-12 h-12 flex justify-center items-center rounded-lg bg-az-lightGray text-az-gold hover:bg-az-gold hover:text-black transition-colors focus:outline-none text-xl">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                        
-                                        <input type="number" id="qty-${product.id}" value="${cart[product.id]}" min="0" 
-                                               class="w-full h-12 bg-transparent text-center text-white font-bold text-xl focus:outline-none"
-                                               onchange="manualUpdateQuantity(${product.id}, this.value)">
-                                               
-                                        <button onclick="updateQuantity(${product.id}, -1)" class="w-12 h-12 flex justify-center items-center rounded-lg bg-az-lightGray text-gray-400 hover:bg-red-900 hover:text-white transition-colors focus:outline-none text-xl">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
+                            <!-- جدول أسعار الجملة -->
+                            ${tiersHTML}
+
+                            <!-- حاسبة الكمية والسعر الإجمالي -->
+                            <div class="bg-black p-4 rounded-xl border border-az-gray flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs text-gray-500 mb-1">حدد الكمية المطلوبة:</p>
+                                    <div class="flex items-center border border-az-gray rounded-lg overflow-hidden bg-az-dark">
+                                        <button onclick="changeQty('${product.sku}', 1)" class="w-10 h-10 text-az-gold hover:bg-az-gray"><i class="fas fa-plus"></i></button>
+                                        <input type="number" id="input-${product.sku}" value="0" min="0" class="w-16 h-10 bg-transparent text-center text-white font-bold focus:outline-none" onchange="manualQty('${product.sku}', this.value)">
+                                        <button onclick="changeQty('${product.sku}', -1)" class="w-10 h-10 text-gray-400 hover:bg-az-gray hover:text-red-400"><i class="fas fa-minus"></i></button>
                                     </div>
+                                </div>
+                                <div class="text-left">
+                                    <p class="text-xs text-gray-500 mb-1">المجموع الفرعي:</p>
+                                    <p id="subtotal-${product.sku}" class="text-xl font-black text-az-gold">0 د.ج</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
-                grid.innerHTML += cardHTML;
+                container.innerHTML += html;
             });
         };
 
-        const updateQuantity = (id, change) => {
-            let currentQty = cart[id];
-            let newQty = currentQty + change;
-            if (newQty < 0) newQty = 0;
-            cart[id] = newQty;
-            updateUI();
+        // تحديث الكمية عبر الأزرار
+        const changeQty = (sku, amount) => {
+            let q = cart[sku] + amount;
+            if (q < 0) q = 0;
+            cart[sku] = q;
+            updateInterface();
         };
 
-        const manualUpdateQuantity = (id, value) => {
-            let newQty = parseInt(value);
-            if (isNaN(newQty) || newQty < 0) newQty = 0;
-            cart[id] = newQty;
-            updateUI();
+        // تحديث الكمية يدوياً
+        const manualQty = (sku, val) => {
+            let q = parseInt(val);
+            if (isNaN(q) || q < 0) q = 0;
+            cart[sku] = q;
+            updateInterface();
         };
 
-        const updateUI = () => {
-            let totalItems = 0;
-            let totalPrice = 0;
+        // تحديث الواجهة (الألوان والأسعار)
+        const updateInterface = () => {
+            let globalTotalQty = 0;
+            let globalTotalPrice = 0;
+            let hasNegotiation = false;
 
             products.forEach(product => {
-                const qty = cart[product.id];
-                totalItems += qty;
-                totalPrice += (qty * product.price);
+                const qty = cart[product.sku];
+                document.getElementById(`input-${product.sku}`).value = qty;
+                globalTotalQty += qty;
 
-                const inputElement = document.getElementById(`qty-${product.id}`);
-                if(inputElement) inputElement.value = qty;
-
-                const cardElement = document.getElementById(`card-${product.id}`);
-                if(cardElement) {
-                    if(qty > 0) {
-                        cardElement.classList.replace('border-az-lightGray', 'border-az-gold');
-                        cardElement.classList.add('shadow-gold');
+                // تحديث ألوان الشرائح (Tiers)
+                product.tiers.forEach((tier, index) => {
+                    const el = document.getElementById(`tier-${product.sku}-${index}`);
+                    if (qty >= tier.min && qty <= tier.max && qty > 0) {
+                        el.className = "tier-active border rounded-lg p-2 text-center transition-all transform scale-105 shadow-gold";
                     } else {
-                        cardElement.classList.replace('border-az-gold', 'border-az-lightGray');
-                        cardElement.classList.remove('shadow-gold');
+                        el.className = "tier-inactive border rounded-lg p-2 text-center transition-all";
                     }
+                });
+
+                // حساب السعر الفرعي
+                const unitPrice = getPriceForQty(product.sku, qty);
+                const subTotalEl = document.getElementById(`subtotal-${product.sku}`);
+                
+                if (unitPrice === 'تفاوض') {
+                    subTotalEl.innerHTML = '<span class="text-green-400 text-base">بالتفاوض</span>';
+                    hasNegotiation = true;
+                } else {
+                    const sub = qty * unitPrice;
+                    subTotalEl.innerText = `${formatMoney(sub)} د.ج`;
+                    globalTotalPrice += sub;
                 }
             });
 
-            document.getElementById('total-items').innerText = totalItems;
-            document.getElementById('total-price').innerText = formatPrice(totalPrice);
-
-            const checkoutBar = document.getElementById('checkout-bar');
-            if (totalItems > 0) {
-                checkoutBar.classList.remove('translate-y-full');
+            // تحديث الشريط السفلي
+            document.getElementById('total-qty').innerText = globalTotalQty;
+            document.getElementById('total-price').innerText = formatMoney(globalTotalPrice);
+            
+            if(hasNegotiation) {
+                document.getElementById('negotiation-note').classList.remove('hidden');
+                document.getElementById('total-price').innerHTML += ' <span class="text-green-400 text-lg">+ تفاوض</span>';
             } else {
-                checkoutBar.classList.add('translate-y-full');
+                document.getElementById('negotiation-note').classList.add('hidden');
+            }
+
+            const bar = document.getElementById('checkout-bar');
+            if (globalTotalQty > 0) {
+                bar.classList.remove('translate-y-full');
+            } else {
+                bar.classList.add('translate-y-full');
             }
         };
 
-        const sendToWhatsApp = () => {
-            let totalItems = 0;
-            let totalPrice = 0;
-            
-            let message = "مرحباً *AZ Emballage* 👑\n";
-            message += "أود تقديم طلبية الجملة التالية من الكتالوج الرقمي:\n\n";
+        // إرسال الطلبية للواتساب
+        const sendOrder = () => {
+            let msg = "مرحباً *AZ Emballage* 👑\n";
+            msg += "أرغب في تأكيد طلبية الجملة التالية:\n\n";
 
-            products.forEach(product => {
-                const qty = cart[product.id];
-                if (qty > 0) {
-                    const itemTotal = qty * product.price;
-                    totalItems += qty;
-                    totalPrice += itemTotal;
+            let totalNum = 0;
+            let totalMoney = 0;
+            let hasNeg = false;
+
+            products.forEach(p => {
+                const q = cart[p.sku];
+                if (q > 0) {
+                    const pUnit = getPriceForQty(p.sku, q);
+                    msg += `📦 *${p.name}* (Ref: ${p.sku})\n`;
+                    msg += `الكمية: ${q} قطعة\n`;
                     
-                    message += `📦 *${product.name}*\n`;
-                    message += `الكمية: ${qty} قطعة\n`;
-                    message += `السعر: ${formatPrice(itemTotal)} د.ج\n`;
-                    message += `---------------------------\n`;
+                    if (pUnit === 'تفاوض') {
+                        msg += `سعر الوحدة: كمية كبيرة (يحدد بالتفاوض)\n`;
+                        hasNeg = true;
+                    } else {
+                        msg += `سعر الوحدة: ${pUnit} د.ج\n`;
+                        msg += `المجموع الفرعي: ${formatMoney(q * pUnit)} د.ج\n`;
+                        totalMoney += (q * pUnit);
+                    }
+                    msg += `---------------------------\n`;
+                    totalNum += q;
                 }
             });
 
-            message += `\n📊 *ملخص الطلبية:*\n`;
-            message += `إجمالي القطع: ${totalItems} قطعة\n`;
-            message += `*المبلغ الإجمالي: ${formatPrice(totalPrice)} د.ج*\n\n`;
-            message += "الرجاء تأكيد الطلب. شكراً لكم.";
+            msg += `\n📊 *الملخص النهائي:*\n`;
+            msg += `إجمالي القطع: ${totalNum}\n`;
+            if(hasNeg) {
+                msg += `المبلغ الإجمالي: ${formatMoney(totalMoney)} د.ج + منتجات بالتفاوض\n`;
+            } else {
+                msg += `المبلغ الإجمالي: *${formatMoney(totalMoney)} د.ج*\n`;
+            }
 
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-            window.open(whatsappURL, '_blank');
+            const url = `https://wa.me/213791059501?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
         };
 
-        // Initialize on load
+        // تشغيل التطبيق
         window.onload = () => {
             renderProducts();
-            updateUI();
         };
     </script>
 </body>
 </html>
+```eof
+
+### واش درنا في هذا الكود:
+1. **الـ Calculator الذكي:** كيما طلبت، إذا الزبون كتب 10 حبات السعر ينحسب بـ 280 د.ج. إذا كتب 50 حبة، أوتوماتيكياً الخانة تاع "20-199" تضوى بالذهبي، والسعر يولي 240 د.ج ويحسبلو المجموع. وإذا دار 2000 حبة يكتبلو السعر "بالتفاوض".
+2. **مكان الصور:** في الكود، حوّس على جملة **`// ⚠️ هنا تضع رابط الصورة الخاصة بك من GitHub ⚠️`**. ثمّا تبدل الرابط لي درتو أنا (Unsplash) بالرابط تاعك من GitHub (لازم يكون Raw Image Link باش تبان الصورة).
+3. **أماكن المنتجات القادمة:** درتلك 3 مربعات لتحت (فارغين) مكتوب فيهم "قريباً" و "يتم التجهيز" (Support montres 3 etage, support lunette rotatif, etc.) باش الزبون كي يدخل يعرف بلي الشركة تاعك راهي تخدم وتطور في منتجات جديدة حصرية.
+4. **الشعار:** زدت Slogan "بكل فخر ....صنع جزائري" في الفوق كيما طلبت تماماً.
+
+إذا بغيت تجربو، اضغط على زر "Preview" وشوف كيفاش Calculator يخدم بـ style تاع Alibaba! كي تبغي تزيد produit الزاوج، تنسخ فقط البلوك اللي راه في الجافاسكريبت (شرحتهالك في الكود). واش رايك؟
